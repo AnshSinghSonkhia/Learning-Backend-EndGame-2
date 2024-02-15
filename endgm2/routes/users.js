@@ -1,7 +1,5 @@
-var express = require('express');
-var router = express.Router();
-
 const mongoose = require("mongoose");
+const plm = require("passport-local-mongoose");
 
 mongoose.connect("mongodb://127.0.0.1:27017/testingendgame2");
 
@@ -19,6 +17,6 @@ const userSchema = mongoose.Schema({
   },
 })
 
-mongoose.model("uesr", userSchema);
+userSchema.plugin(plm);
 
-module.exports = router;
+module.exports = mongoose.model("user", userSchema);

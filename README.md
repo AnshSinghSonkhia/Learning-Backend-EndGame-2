@@ -145,12 +145,183 @@ const userModel = require("./users");
 
 ## How can I perform a case-insensitive search in Mongoose?
 
+`Case-insensitive` --> whether the user wants to find `Ansh` or `ansh`, the result should arrive. 
+
+> `index.js` with `Case-Sensitive` Search
+
+```js
+router.get("/create", async function (req, res, next) {
+  let userdata = await userModel.create({
+    username: "Ansh Singh Sonkhia",
+    nickname: "Nimmi",
+    description: "A Passonate SDE from INDIA.",
+    categories: ['JS', 'TS', 'Tailwind', 'Kotlin'],
+  });
+  res.send(userdata);
+});
+
+router.get("/find", async function(req, res){
+  let user = await userModel.find({username: "Ansh Singh Sonkhia"});
+  res.send(user);
+});
+```
+
+> `index.js` with `Case-Insensitive` Search
+
+```js
+router.get("/create", async function (req, res, next) {
+  let userdata = await userModel.create({
+    username: "Ansh Singh Sonkhia",
+    nickname: "Nimmi",
+    description: "A Passonate SDE from INDIA.",
+    categories: ['JS', 'TS', 'Tailwind', 'Kotlin'],
+  });
+  res.send(userdata);
+});
+
+router.get("/find", async function(req, res){
+  var regex = new RegExp("Ansh Singh Sonkhia", "i")
+  let user = await userModel.find({username: regex});
+  res.send(user);
+});
+```
+
+- `^` - Shows the start
+- `$` - Shows the end
+
+```js
+router.get("/find", async function(req, res){
+  var regex = new RegExp("^Ansh$", "i")
+  let user = await userModel.find({username: regex});
+  res.send(user);
+});
+```
+
 ## How do I find documents where an array field contains all of a set of values?
+
+> To find all data documents with people with category - `JS`
+
+```js
+router.get("/find", async function(req, res){
+  let user = await userModel.find({categories: {$all: ['JS']}});
+  res.send(user);
+});
+```
 
 ## How can I search for documents with a specific date range in Mongoose?
 
+- `$gte` --> greater than equal to
+- `$lte` --> less than equal to
+
+```js
+router.get("/find", async function(req, res){
+  var date1 = new Date('2024-02-14');
+  var date2 = new Date('2024-02-16');
+  let user = await userModel.find({datecreated: {$gte: date1, $lte: date2}});
+  res.send(user);
+});
+```
+
 ## How can I filter documents based on the existence of a field in Mongoose?
+
+> All the documents which have field - `categories`
+
+```js
+router.get("/find", async function(req, res){
+  let user = await userModel.find({categories: {$exists: true}});
+  res.send(user);
+});
+```
 
 ## How can I filter documents based on a specific field's length in Mongoose?
 
-# Time-stamp: 41:10
+> Find all people, within a specific field length
+
+- $strLenCP --> String Length Compare
+
+
+```js
+router.get("/find", async function(req, res){
+  let user = await userModel.find({
+    $expr: {
+      $and: [
+        {$gte: [{$strLenCP: '$nickname'}, 0]},
+        {$lte: [{$strLenCP: '$nickname'}, 6]}
+      ],
+    }
+  })
+  res.send(user);
+  // Array inside another object [{}]
+  // We will get All the strings with nickname's length 0 to 6
+});
+```
+
+# Authentication and Authorization
+
+> passportjs - passportjs.org
+
+## Follow these Steps
+
+1. Install these packages:
+
+```shell
+npm i passport passport-local passport-local-mongoose mongoose express-session
+```
+
+2. Write app.js code in `app.js` file --> after `view engine` and before `logger`
+
+```js
+app.use(expressSession({
+  resave: false,
+  saveUninitialized: false,
+  secret: "kuch bhi string as a secret code"
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.serializeUser(usersRouter.serializeUser());
+passport.deserializeUser(usersRouter.deserializeUser());
+```
+
+3. In `index.js` --> write this to require..
+
+```js
+const passport = require('passport');
+const localStrategy = require("passport-local").Strategy;
+passport.use(new localStrategy(userModel.authenticate()));
+```
+
+4. setup `users.js` properly
+
+```js
+const mongoose = require("mongoose");
+const plm = require("passport-local-mongoose");
+
+mongoose.connect("mongodb://127.0.0.1:27017/testingendgame2");
+
+const userSchema = mongoose.Schema({
+  username: String,
+  nickname: String,
+  description: String,
+  categories: {
+    type: Array,
+    default: []
+  },
+  datecreated: {
+    type: Date,
+    default: Date.now()
+  },
+})
+
+userSchema.plugin(plm);
+
+module.exports = mongoose.model("user", userSchema);
+```
+
+5. In `index.js` try register first, and then other codes as well
+
+## Protected Routes
+
+- These are routes, which can not be accessed if the user is not login.
+
+# Time-stamp: 1:28:30

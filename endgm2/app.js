@@ -10,6 +10,9 @@ const flash = require("connect-flash");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+const passport = require('passport');
+
+
 var app = express();
 
 // view engine setup
@@ -20,7 +23,12 @@ app.use(expressSession({
   resave: false,
   saveUninitialized: false,
   secret: "kuch bhi string as a secret code"
-}))
+}))   // allowing sessions to get saved. But, not saving the session.
+
+app.use(passport.initialize());   // starting the passport to perform authentication authorization
+app.use(passport.session());      // activating, passport's session module, which will help passport to save its session
+passport.serializeUser(usersRouter.serializeUser());      // the code to checkin the users, performing hashing, etc....
+passport.deserializeUser(usersRouter.deserializeUser());
 
 app.use(flash());
 
