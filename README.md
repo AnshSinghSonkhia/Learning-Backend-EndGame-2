@@ -2,6 +2,21 @@
 
 Learning what matters
 
+## Tech-Stack:
+<!-- Refer: https://simpleicons.org/ -->
+
+  <code><img height="30" src="https://img.shields.io/badge/JavaScript-111111?style=for-the-badge&logo=javascript&logoColor=F7DF1E"></code>
+  <code><img height="30" src="https://img.shields.io/badge/MongoDB-111111?style=for-the-badge&logo=mongodb&logoColor=09f515"></code>
+  <code><img height="30" src="https://img.shields.io/badge/Express%20JS-111111?style=for-the-badge&logo=express&logoColor=F7DF1E"></code>
+  <code><img height="30" src="https://img.shields.io/badge/Node%20JS-111111?style=for-the-badge&logo=node.js&logoColor=09f515"></code>
+  <code><img height="30" src="https://img.shields.io/badge/EJS-111111?style=for-the-badge&logo=ejs&logoColor=00caff"></code>
+  <code><img height="30" src="https://img.shields.io/badge/Bootstrap-111111?style=for-the-badge&logo=bootstrap&logoColor=00caff"></code>
+  <code><img height="30" src="https://img.shields.io/badge/Backend-111111?style=for-the-badge&logo=backend&logoColor=00caff"></code>
+  <code><img height="30" src="https://img.shields.io/badge/Authentication-111111?style=for-the-badge&logo=authentication&logoColor=00caff"></code>
+  <code><img height="30" src="https://img.shields.io/badge/Authorization-111111?style=for-the-badge&logo=authorization&logoColor=00caff"></code>
+  <code><img height="30" src="https://img.shields.io/badge/Passport%20JS-111111?style=for-the-badge&logo=passport&logoColor=34E27A"></code>
+  <code><img height="30" src="https://img.shields.io/badge/Mongoose%20JS-111111?style=for-the-badge&logo=mongoose&logoColor=880000"></code>
+
 # Run app
 
 ```shell
@@ -323,5 +338,3 @@ module.exports = mongoose.model("user", userSchema);
 ## Protected Routes
 
 - These are routes, which can not be accessed if the user is not login.
-
-# Time-stamp: 1:28:30
