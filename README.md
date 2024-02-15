@@ -16,6 +16,7 @@ Learning what matters
   <code><img height="30" src="https://img.shields.io/badge/Authorization-111111?style=for-the-badge&logo=authorization&logoColor=00caff"></code>
   <code><img height="30" src="https://img.shields.io/badge/Passport%20JS-111111?style=for-the-badge&logo=passport&logoColor=34E27A"></code>
   <code><img height="30" src="https://img.shields.io/badge/Mongoose%20JS-111111?style=for-the-badge&logo=mongoose&logoColor=880000"></code>
+  <code><img height="30" src="https://img.shields.io/badge/Flash%20Messages-111111?style=for-the-badge&logo=flash&logoColor=880000"></code>
 
 # Run app
 
