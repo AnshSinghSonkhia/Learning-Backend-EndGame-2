@@ -12,11 +12,13 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "express-session": "^1.18.0",
+    "fast-currency-transformer": "^1.0.2",
     "http-errors": "~1.6.3",
     "mongoose": "^8.1.2",
     "morgan": "~1.9.1",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^8.0.0"
+    "passport-local-mongoose": "^8.0.0",
+    "thousand-colors": "^1.0.0"
   }
 }
